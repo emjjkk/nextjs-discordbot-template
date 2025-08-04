@@ -1,4 +1,7 @@
-export async function handleCommand(interaction: any) {
+import type { APIChatInputApplicationCommandInteraction } from 'discord-api-types/v10'
+
+export async function handleCommand(interaction: APIChatInputApplicationCommandInteraction) {
+
   const { name } = interaction.data
 
   if (name === 'ping') {
