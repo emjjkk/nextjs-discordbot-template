@@ -1,0 +1,5 @@
+curl -X POST https://3000-emjjkk-nextjsdiscordbot-65pj373jz73.ws-eu120.gitpod.io/api/interactions \
+  -H "x-signature-ed25519: ..." \
+  -H "x-signature-timestamp: ..." \
+  -H "Content-Type: application/json" \
+  -d '{"type":1}'
