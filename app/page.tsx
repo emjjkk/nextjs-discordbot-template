@@ -27,7 +27,7 @@ export default function InvitePage() {
       {isDevelopment ? (
         <main>Application is under development</main>
       ) : (
-        <main>Viewing documentation site</main>
+        <main>Viewing documentation site {inviteUrl} </main>
       )}
     </>
   )
