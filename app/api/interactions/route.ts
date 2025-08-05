@@ -7,7 +7,7 @@ export const runtime = 'edge'
 const PUBLIC_KEY = process.env.DISCORD_PUBLIC_KEY!
 
 export async function GET() {
-  return new NextResponse('OK') // Or 405 if you wanna be strict
+  return new NextResponse('OK')
 }
 
 export async function POST(req: NextRequest) {
@@ -22,21 +22,22 @@ export async function POST(req: NextRequest) {
       return new NextResponse('Invalid signature', { status: 401 })
     }
 
-    console.log('[Discord] Signature:', signature)
-    console.log('[Discord] Timestamp:', timestamp)
-    console.log('[Discord] Raw body:', rawBody)
-    console.log('[Discord] Public key:', PUBLIC_KEY)
-    console.log('[Discord] Valid:', isValid)
+    // Just in case your interaction endpoint isn't getting verified and need to do serious debugging
+    
+    // console.log('[Discord] Signature:', signature)
+    // console.log('[Discord] Timestamp:', timestamp)
+    // console.log('[Discord] Raw body:', rawBody)
+    // console.log('[Discord] Public key:', PUBLIC_KEY)
+    // console.log('[Discord] Valid:', isValid)
 
     const interaction = JSON.parse(rawBody)
 
-    // Respond to Discord PING
+    
     if (interaction.type === 1) {
       return NextResponse.json({ type: 1 })
     }
-
-    // Otherwise handle command
     return await handleCommand(interaction)
+
   } catch (err) {
     console.error('❌ Discord interaction error:', err)
     return new NextResponse(

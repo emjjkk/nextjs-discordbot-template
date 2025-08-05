@@ -12,7 +12,7 @@ function ask(question: string): Promise<string> {
     rl.question(question, (answer) => resolve(answer.trim()))
   })
 }
-
+ 
 async function main() {
   try {
     const DISCORD_TOKEN = await ask('Enter your Discord Bot Token: ')
@@ -22,12 +22,17 @@ async function main() {
       throw new Error('Both token and application ID are required!')
     }
 
+    // EDIT THE COMMANDS HERE 
+    // [Don't edit code above this line]
+
     const commands = [
       {
         name: 'ping',
         description: 'Replies with Pong!',
       },
     ]
+
+    // [Don't edit code below this line]
 
     const rest = new REST({ version: '10' }).setToken(DISCORD_TOKEN)
 
