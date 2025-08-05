@@ -1,4 +1,3 @@
-// app/api/discord/route.ts
 import { NextRequest, NextResponse } from 'next/server'
 import { verifyKey } from 'discord-interactions'
 import { handleCommand } from '@/lib/discord/commands'
@@ -17,11 +16,17 @@ export async function POST(req: NextRequest) {
     const timestamp = req.headers.get('x-signature-timestamp')!
     const rawBody = await req.text()
 
-    const isValid = verifyKey(rawBody, signature, timestamp, PUBLIC_KEY)
+    const isValid = await verifyKey(rawBody, signature, timestamp, PUBLIC_KEY)
 
     if (!isValid) {
       return new NextResponse('Invalid signature', { status: 401 })
     }
+
+    console.log('[Discord] Signature:', signature)
+    console.log('[Discord] Timestamp:', timestamp)
+    console.log('[Discord] Raw body:', rawBody)
+    console.log('[Discord] Public key:', PUBLIC_KEY)
+    console.log('[Discord] Valid:', isValid)
 
     const interaction = JSON.parse(rawBody)
 
